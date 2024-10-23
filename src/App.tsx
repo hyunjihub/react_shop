@@ -2,6 +2,7 @@ import "./assets/css/tailwind.css";
 
 import { BrowserRouter } from "react-router-dom";
 import Drawer from "./components/common/Drawer";
+import Footer from "./components/layout/Footer";
 import Nav from "./components/layout/Nav";
 import Router from "./router/router";
 import { useState } from "react";
@@ -11,13 +12,19 @@ const App = (): JSX.Element => {
 
   return (
     <BrowserRouter>
-      <input type="checkbox" id="side-menu" className="drawer-toggle" checked={isDrawerOpen} />
+      <input
+        type="checkbox"
+        id="side-menu"
+        className="drawer-toggle"
+        onChange={() => setIsDrawerOpen((prev) => !prev)}
+        checked={isDrawerOpen}
+      />
       <section className="drawer-content">
         <Nav isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
         <section className="main">
           <Router />
         </section>
-        {/* Footer를 렌더링 하세요 */}
+        <Footer />
       </section>
       <Drawer isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
     </BrowserRouter>

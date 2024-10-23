@@ -25,3 +25,8 @@ body {
 .js-searchedItem:active span {
   color: white !important;
 }
+
+.product_list {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-auto-columns: minmax(220px, 1fr);
+}
