@@ -69,7 +69,7 @@ const Nav = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
             {theme === "light" ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
           </button>
           <input
-            className="hidden sm:block p-3 rounded outline-none bg-[#B7B7B7]/50 placeholder:text-[#B7B7B7]/70 dark:bg-[#FCFAEE]/50 placeholder:text-[#FCFAEE]/70"
+            className="hidden sm:block p-3 rounded outline-none bg-[#B7B7B7]/50 placeholder:text-[#B7B7B7] dark:bg-[#FCFAEE]/50 placeholder:text-[#FCFAEE]/70"
             placeholder="검색"
           />
           <button className="text-2xl block sm:hidden">

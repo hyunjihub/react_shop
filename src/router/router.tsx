@@ -5,6 +5,7 @@ import Digital from "../views/Digital";
 import Error from "../views/Error";
 import Fashion from "../views/Fashion";
 import Index from "../views/Index";
+import Product from "../views/Product";
 import { memo } from "react";
 
 const Router = (): JSX.Element => {
@@ -15,6 +16,7 @@ const Router = (): JSX.Element => {
       <Route path="/fashion" element={<Fashion />} />
       <Route path="/accessory" element={<Accessory />} />
       <Route path="/digital" element={<Digital />} />
+      <Route path="/product/:id" element={<Product />} />
     </Routes>
   );
 };

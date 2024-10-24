@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 const ProductItem = ({ product }): JSX.Element => {
   return (
-    <a className="border rounded-lg bg-gray-200" href="#">
+    <Link to={`/product/${product.id}`} className="border rounded-lg bg-gray-200">
       <figure className="bg-white h-80 rounded-lg overflow-hidden flex items-center justify-center">
         <img
           className="w-36 max-h-36 rounded-lg object-contain transition-transform duration-500 ease-in-out transform hover:scale-125"
@@ -12,7 +14,7 @@ const ProductItem = ({ product }): JSX.Element => {
         <strong>{product.title}</strong>
         <p>${product.price}</p>
       </div>
-    </a>
+    </Link>
   );
 };
 
