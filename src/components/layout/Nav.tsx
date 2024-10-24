@@ -8,6 +8,7 @@ import { IoMenuSharp } from "react-icons/io5";
 import { MENUS } from "../../constants/category";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
+import Search from "../common/Search";
 import { useRecoilState } from "recoil";
 
 const Nav = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
@@ -68,10 +69,7 @@ const Nav = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
           >
             {theme === "light" ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
           </button>
-          <input
-            className="hidden sm:block p-3 rounded outline-none bg-[#B7B7B7]/50 placeholder:text-[#B7B7B7] dark:bg-[#FCFAEE]/50 placeholder:text-[#FCFAEE]/70"
-            placeholder="검색"
-          />
+          <Search />
           <button className="text-2xl block sm:hidden">
             <IoIosSearch />
           </button>
