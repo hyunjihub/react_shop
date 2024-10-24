@@ -1,14 +1,20 @@
-import { Routes, Route } from "react-router-dom";
-import { memo } from "react";
+import { Route, Routes } from "react-router-dom";
+
+import Accessory from "../views/Accessory";
+import Digital from "../views/Digital";
 import Error from "../views/Error";
+import Fashion from "../views/Fashion";
 import Index from "../views/Index";
+import { memo } from "react";
 
 const Router = (): JSX.Element => {
   return (
     <Routes>
       <Route path="*" element={<Error />} />
       <Route path="/" element={<Index />} />
-      {/* 라우팅 추가 해보세요. */}
+      <Route path="/fashion" element={<Fashion />} />
+      <Route path="/accessory" element={<Accessory />} />
+      <Route path="/digital" element={<Digital />} />
     </Routes>
   );
 };

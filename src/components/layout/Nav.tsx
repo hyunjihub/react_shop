@@ -1,3 +1,4 @@
+import { Link, NavLink } from "react-router-dom";
 import { Theme, themeState } from "../../store/theme";
 import { useEffect, useState } from "react";
 
@@ -45,14 +46,14 @@ const Nav = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
               <>
                 {value === "홈" ? (
                   <h1 key={key} className="text-lg font-bold cursor-pointer">
-                    React Shop
+                    <Link to={"/"}>React Shop</Link>
                   </h1>
                 ) : (
                   <li
                     key={key}
                     className="hidden md:block py-1 px-2 rounded-lg cursor-pointer text-sm font-semibold hover:bg-[#B7B7B7]/40 dark:hover:bg-[#FCFAEE]/40"
                   >
-                    {value}
+                    <NavLink to={`/${key.toLowerCase()}`}>{value}</NavLink>
                   </li>
                 )}
               </>

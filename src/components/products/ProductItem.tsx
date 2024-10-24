@@ -1,9 +1,9 @@
 const ProductItem = ({ product }): JSX.Element => {
   return (
-    <a className="w-1/4 border rounded-lg bg-gray-200" href="#">
+    <a className="border rounded-lg bg-gray-200" href="#">
       <figure className="bg-white h-80 rounded-lg overflow-hidden flex items-center justify-center">
         <img
-          className="h-36 rounded-lg object-cover transition-transform duration-500 ease-in-out transform hover:scale-125"
+          className="w-36 max-h-36 rounded-lg object-contain transition-transform duration-500 ease-in-out transform hover:scale-125"
           src={product.image}
           alt={product.title}
         />
