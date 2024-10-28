@@ -1,5 +1,10 @@
-import { atom, selector } from "recoil";
+import { atom, selector, useSetRecoilState } from "recoil";
+
 import { CART_ITEM } from "../constants/category";
+import CONSTANTS from "../constants/constants";
+import { IProduct } from "./products";
+
+const productsURL = `${CONSTANTS.IS_DEV ? `/proxy` : `${import.meta.env.VITE_FAKE_STORE_API}`}/products`;
 
 export interface ICartInfo {
   readonly id: number;
@@ -33,22 +38,69 @@ export const cartState = atom<ICartState>({
   ],
 });
 
+export const cartList = selector<ICartItems[]>({
+  key: "cartList",
+  get: async ({ get }) => {
+    const cart = get(cartState);
+    try {
+      const response = await fetch(productsURL);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const products: IProduct[] = await response.json();
+      const cartItemIds = Object.keys(cart.items || {});
 
-/**
- * cartList를 구현 하세요.
- * id, image, count 등을 return합니다.
- */
+      // 장바구니에 있는 아이템들만 필터링
+      const matchingProducts = products.filter((product) => cartItemIds.includes(product.id.toString()));
 
-// addToCart는 구현 해보세요.
+      return matchingProducts.map((product) => ({
+        id: product.id.toString(),
+        title: product.title,
+        price: product.price,
+        count: cart.items![product.id.toString()]?.count || 0,
+        image: product.image,
+      }));
+    } catch (error) {
+      console.log(`Error: \n${error}`);
+      return [];
+    }
+  },
+});
 
-// removeFromCart는 참고 하세요.
-export const removeFromCart = (cart: ICartState, id: string) => {
-  const tempCart = { ...cart };
-  if (tempCart[id].count === 1) {
-    delete tempCart[id];
-    return tempCart;
+export const addToCart = (cart: ICartState, item: ICartItems) => {
+  const tempCart = { ...cart.items };
+  const itemId = Number(item.id);
+
+  if (tempCart[itemId]) {
+    // 이미 장바구니에 있는 경우, 새로운 객체 생성
+    return {
+      items: {
+        ...tempCart,
+        [itemId]: { ...tempCart[itemId], count: tempCart[itemId].count + 1 },
+      },
+    };
   } else {
-    return { ...tempCart, [id]: { id: id, count: cart[id].count - 1 } };
+    // 장바구니에 없는 경우
+    return {
+      items: { ...tempCart, [itemId]: { id: itemId, count: 1 } },
+    };
+  }
+};
+
+export const removeFromCart = (cart: ICartState, id: string) => {
+  const tempCart = { ...cart.items };
+
+  // 해당 id가 tempCart에 존재하는지 확인
+  if (tempCart[id]?.count === 1) {
+    delete tempCart[id];
+    return { items: tempCart };
+  } else {
+    return {
+      items: {
+        ...tempCart,
+        [id]: { ...tempCart[id], count: tempCart[id].count - 1 },
+      },
+    };
   }
 };
 

@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { Theme, themeState } from "../../store/theme";
 import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { IoIosSearch } from "react-icons/io";
@@ -9,10 +10,11 @@ import { MENUS } from "../../constants/category";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
 import Search from "../common/Search";
-import { useRecoilState } from "recoil";
+import { cartState } from "../../store/cart";
 
 const Nav = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
   const [theme, setTheme] = useRecoilState<Theme>(themeState);
+  const cart = useRecoilValue(cartState);
   const [isRotated, setIsRotated] = useState(false);
 
   const toggleTheme = () => {
@@ -31,6 +33,10 @@ const Nav = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  const getTotalItemCount = () => {
+    return Object.values(cart.items || {}).reduce((acc, item) => acc + (item.count || 0), 0);
+  };
 
   return (
     <nav className="h-16 sticky top-0 z-10 transition-colors duration-300 bg-white dark:bg-black drop-shadow-lg">
@@ -74,10 +80,12 @@ const Nav = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
             <IoIosSearch />
           </button>
           <div className="relative">
-            <button className="text-2xl mr-2 mt-2">
+            <Link to="/cart" className="text-2xl mr-2 mt-2 inline-block">
               <HiOutlineShoppingBag />
-            </button>
-            <span className="px-1.5 absolute right-0 bg-red-500 text-white text-sm rounded-full">0</span>
+            </Link>
+            <span className="px-1.5 absolute right-0 bg-red-500 text-white text-sm rounded-full">
+              {getTotalItemCount()}
+            </span>
           </div>
         </div>
       </div>

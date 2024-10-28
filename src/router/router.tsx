@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import Accessory from "../views/Accessory";
+import Cart from "../views/Cart";
 import Digital from "../views/Digital";
 import Error from "../views/Error";
 import Fashion from "../views/Fashion";
@@ -17,6 +18,7 @@ const Router = (): JSX.Element => {
       <Route path="/accessory" element={<Accessory />} />
       <Route path="/digital" element={<Digital />} />
       <Route path="/product/:id" element={<Product />} />
+      <Route path="/cart" element={<Cart />} />
     </Routes>
   );
 };

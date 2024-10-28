@@ -19,9 +19,9 @@ const App = (): JSX.Element => {
         onChange={() => setIsDrawerOpen((prev) => !prev)}
         checked={isDrawerOpen}
       />
-      <section className="drawer-content">
+      <section className="drawer-content flex flex-col min-h-screen">
         <Nav isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
-        <section className="main">
+        <section className="main flex-grow">
           <Router />
         </section>
         <Footer />
