@@ -11,20 +11,38 @@ const Search = (): JSX.Element => {
   const [matchedProduct, setMatchedProduct] = useState<IProduct[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const handleFindProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    if (e.target.value.length === 0) {
+  useEffect(() => {
+    // 검색어에 따라 필터링된 상품 리스트 업데이트
+    if (searchTerm.length === 0) {
       setMatchedProduct([]);
       return;
     }
-    const searchTerm = e.target.value.toLowerCase();
-    const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(searchTerm));
+
+    const searchTermLower = searchTerm.toLowerCase();
+    const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(searchTermLower));
+
     setMatchedProduct(filteredProducts);
+  }, [searchTerm, products]);
+
+  const handleFindProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
   const handleProductClick = () => {
     setMatchedProduct([]);
     setSearchTerm("");
+  };
+
+  const handleBlur = () => {
+    setMatchedProduct([]);
+  };
+
+  const handleFocus = () => {
+    if (searchTerm.length > 0) {
+      const searchTermLower = searchTerm.toLowerCase();
+      const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(searchTermLower));
+      setMatchedProduct(filteredProducts);
+    }
   };
 
   return (
@@ -34,6 +52,8 @@ const Search = (): JSX.Element => {
         placeholder="검색"
         value={searchTerm}
         onChange={handleFindProduct}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
       />
       {matchedProduct.length > 0 && (
         <div

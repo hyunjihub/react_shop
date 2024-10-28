@@ -1,12 +1,16 @@
-import { useRecoilState } from "recoil";
 import { ICartState, cartState } from "../../store/cart";
 
-const Confirm = (): JSX.Element => {
+import { useRecoilState } from "recoil";
+
+const Confirm = ({ isConfirm, setIsConfirm }): JSX.Element => {
   const [cart, setCart] = useRecoilState<ICartState>(cartState);
-  const buyItems = () => setCart({} as ICartState);
+  const buyItems = () => {
+    setCart({} as ICartState);
+    setIsConfirm(false);
+  };
   return (
     <>
-      <input type="checkbox" id="confirm-modal" className="modal-toggle" />
+      <input type="checkbox" id="confirm-modal" className="modal-toggle" checked={isConfirm} />
       <div className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">정말로 구매하시겠습니까?</h3>
@@ -15,7 +19,7 @@ const Confirm = (): JSX.Element => {
             <label htmlFor="confirm-modal" className="btn btn-primary" data-cart={cart} onClick={buyItems}>
               네
             </label>
-            <label htmlFor="confirm-modal" className="btn btn-outline">
+            <label htmlFor="confirm-modal" className="btn btn-outline" onClick={() => setIsConfirm(false)}>
               아니오
             </label>
           </div>
