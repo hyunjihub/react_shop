@@ -20,7 +20,7 @@ const CartItem = ({ item }): JSX.Element => {
       <Link to={`/product/${item.id}`}>
         <img src={item.image} alt={item.title} className="w-44 h-44 object-contain" />
       </Link>
-      <div className="flex flex-col gap-4 ml-10">
+      <div className="flex flex-col gap-4 p-5">
         <Link to={`/product/${item.id}`} className="text-xl font-semibold hover:underline">
           {item.title}
         </Link>
@@ -28,17 +28,11 @@ const CartItem = ({ item }): JSX.Element => {
           {toCurrencyFormat(item.price * item.count)} <p className="text-2xl">({toCurrencyFormat(item.price)})</p>
         </span>
         <div className="flex">
-          <button
-            className="py-3 px-4 text-white font-bold rounded-l-md bg-[#5D3587] hover:bg-[#392467]"
-            onClick={removeFromCartHandler}
-          >
+          <button className="rounded-r-md btn btn-primary" onClick={removeFromCartHandler}>
             -
           </button>
           <p className="py-3 px-4 font-semibold hover:bg-gray-300">{item.count}</p>
-          <button
-            className="py-3 px-4 text-white font-bold rounded-r-md bg-[#5D3587] hover:bg-[#392467]"
-            onClick={addToCartHandler}
-          >
+          <button className="rounded-l-md btn btn-primary" onClick={addToCartHandler}>
             +
           </button>
         </div>

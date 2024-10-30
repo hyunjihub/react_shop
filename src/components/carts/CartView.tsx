@@ -20,7 +20,7 @@ const CartView = ({ items }): JSX.Element => {
             </Link>
           </div>
         )}
-        <div className="flex justify-between items-start mt-6">
+        <div className="flex flex-col md:flex-row md:justify-between items-start mt-6">
           <div>
             {items.length !== 0 &&
               items.map((item: ICartItems) => (
@@ -30,7 +30,7 @@ const CartView = ({ items }): JSX.Element => {
               ))}
           </div>
 
-          <div className="flex gap-8 items-center">
+          <div className="flex gap-8 items-center p-5">
             <p className="text-2xl">
               총 : ${items.reduce((total: number, item: ICartItems) => total + item.price * item.count, 0).toFixed(2)}
             </p>

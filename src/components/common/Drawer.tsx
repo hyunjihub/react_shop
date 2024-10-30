@@ -1,4 +1,5 @@
 import { MENUS } from "../../constants/category";
+import { NavLink } from "react-router-dom";
 
 const Drawer = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
   return (
@@ -10,11 +11,8 @@ const Drawer = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
             {value === "홈" ? (
               <></>
             ) : (
-              <li
-                key={key}
-                className="py-3 px-2 rounded-lg cursor-pointer hover:bg-[#B7B7B7]/40 dark:hover:bg-[#FCFAEE]/40"
-              >
-                {value}
+              <li key={key} className="py-3 px-2 rounded-lg cursor-pointer">
+                <NavLink to={`/${key.toLowerCase()}`}>{value}</NavLink>
               </li>
             )}
           </>

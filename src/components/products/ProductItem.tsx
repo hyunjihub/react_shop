@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const ProductItem = ({ product }): JSX.Element => {
   return (
-    <Link to={`/product/${product.id}`} className="border rounded-lg bg-gray-200">
+    <Link to={`/product/${product.id}`} className="border rounded-lg h-full flex flex-col">
       <figure className="bg-white h-80 rounded-lg overflow-hidden flex items-center justify-center">
         <img
           className="w-36 max-h-36 rounded-lg object-contain transition-transform duration-500 ease-in-out transform hover:scale-125"
@@ -10,8 +10,8 @@ const ProductItem = ({ product }): JSX.Element => {
           alt={product.title}
         />
       </figure>
-      <div className="flex flex-col gap-5 py-10 px-5">
-        <strong>{product.title}</strong>
+      <div className="flex flex-col gap-5 py-10 px-5 bg-gray-200 flex-1 justify-between">
+        <strong className="whitespace-normal break-words">{product.title}</strong>
         <p>${product.price}</p>
       </div>
     </Link>

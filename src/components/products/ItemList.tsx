@@ -32,11 +32,13 @@ const ItemList = ({ category, length }): JSX.Element => {
   return (
     <>
       <h1 className="mb-6 text-4xl font-bold text-center">{category}</h1>
-      <div className="max-w-[1340px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="max-w-[1340px] sm:flex sm:overflow-x-auto sm:gap-4 md:grid md:grid-cols-2 lg:grid-cols-4 gap-8 overflow-y-hidden">
         {Array.isArray(productList) &&
-          productList
-            .slice(0, length ? length : productList.length)
-            .map((item: IProduct, index: number) => <ProductItem key={index} product={item} />)}
+          productList.slice(0, length ? length : productList.length).map((item: IProduct, index: number) => (
+            <div key={index} className="sm:min-w-[320px] md:min-w-0">
+              <ProductItem product={item} />
+            </div>
+          ))}
       </div>
     </>
   );
