@@ -12,7 +12,7 @@ const App = (): JSX.Element => {
 
   return (
     <BrowserRouter>
-      <input type="checkbox" id="side-menu" className="drawer-toggle" checked={isDrawerOpen} />
+      <input type="checkbox" id="side-menu" className="drawer-toggle" checked={isDrawerOpen} readOnly />
       <section className="drawer-content flex flex-col min-h-screen">
         <Nav isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
         <section className="main flex-grow">

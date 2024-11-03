@@ -49,22 +49,20 @@ const Nav = ({ isDrawerOpen, setIsDrawerOpen }): JSX.Element => {
             <IoMenuSharp />
           </button>
           <ul className="flex gap-[12px]">
-            {Object.entries(MENUS).map(([key, value]) => (
-              <>
-                {value === "홈" ? (
-                  <h1 key={key} className="text-lg font-bold cursor-pointer">
-                    <Link to={"/"}>React Shop</Link>
-                  </h1>
-                ) : (
-                  <li
-                    key={key}
-                    className="hidden md:block py-1 px-2 rounded-lg cursor-pointer text-sm font-semibold hover:bg-[#B7B7B7]/40 dark:hover:bg-[#FCFAEE]/40"
-                  >
-                    <NavLink to={`/${key.toLowerCase()}`}>{value}</NavLink>
-                  </li>
-                )}
-              </>
-            ))}
+            {Object.entries(MENUS).map(([key, value]) =>
+              value === "홈" ? (
+                <h1 key={key} className="text-lg font-bold cursor-pointer">
+                  <Link to={"/"}>React Shop</Link>
+                </h1>
+              ) : (
+                <li
+                  key={key}
+                  className="hidden md:block py-1 px-2 rounded-lg cursor-pointer text-sm font-semibold hover:bg-[#B7B7B7]/40 dark:hover:bg-[#FCFAEE]/40"
+                >
+                  <NavLink to={`/${key.toLowerCase()}`}>{value}</NavLink>
+                </li>
+              )
+            )}
           </ul>
         </div>
 

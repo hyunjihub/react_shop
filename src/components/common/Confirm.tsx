@@ -10,7 +10,7 @@ const Confirm = ({ isConfirm, setIsConfirm }): JSX.Element => {
   };
   return (
     <>
-      <input type="checkbox" id="confirm-modal" className="modal-toggle" checked={isConfirm} />
+      <input type="checkbox" id="confirm-modal" className="modal-toggle" checked={isConfirm} readOnly />
       <div className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">정말로 구매하시겠습니까?</h3>
