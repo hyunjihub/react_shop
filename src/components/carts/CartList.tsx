@@ -16,11 +16,14 @@ const CartItem = ({ item }): JSX.Element => {
   };
 
   return (
-    <div className="lg:flex lg:items-center mt-4 px-2 lg:px-0">
-      <Link to={`/product/${item.id}`}>
-        <img src={item.image} alt={item.title} className="w-44 h-44 object-contain" />
+    <div className="w-full flex flex-col lg:flex-row lg:items-center mt-4 px-2 lg:px-0 gap-5 lg:gap-10">
+      <Link
+        to={`/product/${item.id}`}
+        className="w-full lg:w-56 h-56 bg-white rounded-2xl flex justify-center items-center"
+      >
+        <img src={item.image} alt={item.title} className="w-48 h-48 object-contain" />
       </Link>
-      <div className="flex flex-col gap-4 p-5">
+      <div className="flex flex-col gap-4">
         <Link to={`/product/${item.id}`} className="text-xl font-semibold hover:underline">
           {item.title}
         </Link>
@@ -42,11 +45,7 @@ const CartItem = ({ item }): JSX.Element => {
 };
 
 const CartList = ({ item }): JSX.Element => {
-  return (
-    <div>
-      <CartItem item={item} />
-    </div>
-  );
+  return <CartItem item={item} />;
 };
 
 export default CartList;

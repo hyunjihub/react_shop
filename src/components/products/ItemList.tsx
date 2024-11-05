@@ -3,15 +3,19 @@ import { useEffect, useState } from "react";
 import { Category } from "../../constants/category";
 import { IProduct } from "../../store/products";
 import ProductItem from "./ProductItem";
+import ProductsLoad from "./ProductsLoad";
 import { productsList } from "../../store/products";
 import { useRecoilValue } from "recoil";
 
 const ItemList = ({ category, length }): JSX.Element => {
   const products = useRecoilValue(productsList);
   const [categorizedProducts, setCategorizedProducts] = useState<{ [key: string]: IProduct[] }>({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!products) return;
+
+    setLoading(true);
 
     const newCategorizedProducts = products.reduce((acc: { [key: string]: IProduct[] }, product) => {
       const productCategory = Category[product.category as keyof typeof Category];
@@ -25,9 +29,14 @@ const ItemList = ({ category, length }): JSX.Element => {
     }, {});
 
     setCategorizedProducts(newCategorizedProducts);
-  }, [products, setCategorizedProducts]);
+    setLoading(false);
+  }, [products]);
 
   const productList = categorizedProducts[category] || [];
+
+  if (loading) {
+    return <ProductsLoad limit={length || 4} />;
+  }
 
   return (
     <>

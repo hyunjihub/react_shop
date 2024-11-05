@@ -20,8 +20,8 @@ const CartView = ({ items }): JSX.Element => {
             </Link>
           </div>
         )}
-        <div className="flex flex-col md:flex-row md:justify-between items-start mt-6">
-          <div>
+        <div className="flex flex-col lg:flex-row lg:justify-between items-start my-6">
+          <div className="w-full lg:flex-1">
             {items.length !== 0 &&
               items.map((item: ICartItems) => (
                 <div key={item.id} className="flex mb-4">
@@ -30,8 +30,8 @@ const CartView = ({ items }): JSX.Element => {
               ))}
           </div>
 
-          <div className="flex gap-8 items-center p-5">
-            <p className="text-2xl">
+          <div className="flex items-center lg:justify-end w-full lg:w-auto mt-4 lg:mt-0">
+            <p className="text-2xl mr-4">
               총 : ${items.reduce((total: number, item: ICartItems) => total + item.price * item.count, 0).toFixed(2)}
             </p>
             <button className="btn btn-primary" onClick={() => setIsConfirm(true)}>
