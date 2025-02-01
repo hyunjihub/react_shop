@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 
 import { Category } from "../../constants/category";
 import { IProduct } from "../../store/products";
-import { Link } from "react-router-dom";
 import { productsList } from "../../store/products";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 const Search = (): JSX.Element => {
   const products = useRecoilValue(productsList);
   const [matchedProduct, setMatchedProduct] = useState<IProduct[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 검색어에 따라 필터링된 상품 리스트 업데이트
@@ -28,9 +29,10 @@ const Search = (): JSX.Element => {
     setSearchTerm(e.target.value);
   };
 
-  const handleProductClick = () => {
+  const handleProductClick = (id: number) => {
     setMatchedProduct([]);
     setSearchTerm("");
+    navigate(`/product/${id}`);
   };
 
   const handleBlur = () => {
@@ -63,10 +65,8 @@ const Search = (): JSX.Element => {
         >
           <ul>
             {matchedProduct.map((item, key) => (
-              <li className="p-3 hover:bg-gray-200" key={key}>
-                <Link to={`/product/${item.id}`} onClick={handleProductClick}>
-                  {item.title}
-                </Link>
+              <li className="p-3 hover:bg-gray-200" key={key} onMouseDown={() => handleProductClick(item.id)}>
+                {item.title}
               </li>
             ))}
           </ul>
